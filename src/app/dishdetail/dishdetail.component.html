@@ -1,7 +1,6 @@
 <div class="container"
      fxFlexLayout="row"
-     fxLayout.sm="column"
-     fxLayout.md="column"
+     fxLayout.xs="column"
      fxLayoutAlign.gt-md="space-around center"
      fxLayoutGap="10px"
      fxLayoutGap.xs="0">
@@ -9,7 +8,7 @@
      <div fxFlex="40">
         <mat-card>
             <mat-card-header>
-                <mat-card-title><span>{{ dish.name | uppercase}}</span></mat-card-title>
+                <mat-card-title><span>{{ dish.name | uppercase }}</span></mat-card-title>
             </mat-card-header>
             <img mat-card-image src={{dish.image}} alt={{dish.name}}>
             <mat-card-content>
