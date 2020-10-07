@@ -13,6 +13,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppComponent } from './app.component';
 
@@ -57,7 +60,10 @@ import { LeaderService } from './services/leader.service';
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [
     DishService,
