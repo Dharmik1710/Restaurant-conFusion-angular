@@ -39,32 +39,32 @@
   <div fxFlexOffset.lg="20px">
     <div><h3>Send us your feedback</h3></div>
     <div>
-      <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" #fform="ngForm" fxFlex.gt-xs="70">
+      <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()" #fform="ngForm" fxFlex.gt-xs="70" fxLayout.gt-md="column" fxLayoutGap="20px">
         <div fxLayoutAlign.gt-xs="space-between center" fxLayout.xs="column" fxLayoutGap.gt-xs="10%">
           <mat-form-field fxFlex>
             <input matInput placeholder="First Name" formControlName="firstname" type="text" required>
-            <mat-error *ngIf="feedbackForm.get('firstname').hasError('required')">
-              First name is required
+            <mat-error *ngFor="let error of formErrors.firstname">
+              {{ error }}
             </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex>
             <input matInput placeholder="Last Name" formControlName="lastname" type="text" required>
-            <mat-error *ngIf="feedbackForm.get('lastname').hasError('required')">
-              Last name is required
+            <mat-error *ngIf="formErrors.lastname">
+              {{ formErrors.lastname }}
             </mat-error>
           </mat-form-field>  
         </div>
         <div fxLayoutAlign.gt-xs="space-between center" fxLayout.xs="column" fxLayoutGap.gt-xs="10%">
           <mat-form-field fxFlex>
-            <input matInput placeholder="Telephone Number" formControlName="telnum" type="text">
+            <input matInput placeholder="Telephone Number" formControlName="telnum" type="text" pattern="[0-9]{10}" required>
+            <mat-error *ngIf="formErrors.telnum">
+              {{ formErrors.telnum }}
+            </mat-error>
           </mat-form-field>
           <mat-form-field fxFlex>
-            <input matInput placeholder="Email" formControlName="email" type="text" required>
-            <mat-error *ngIf="feedbackForm.get('email').hasError('required')">
-              Email is required
-            </mat-error>
-            <mat-error *ngIf="feedbackForm.get('email').hasError('email')">
-              Email Id entered is invalid
+            <input matInput placeholder="Email" formControlName="email" type="text" email required>
+            <mat-error *ngFor="let error of formErrors.email">
+              {{ error }}
             </mat-error>
           </mat-form-field>  
         </div>
