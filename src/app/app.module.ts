@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -64,6 +65,7 @@ import { LeaderService } from './services/leader.service';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatSliderModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule
   ],
