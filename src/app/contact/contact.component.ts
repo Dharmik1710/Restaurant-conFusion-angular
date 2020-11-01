@@ -1,17 +1,28 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Feedback, ContactType } from '../shared/feedback';
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { flyInOut } from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
+import { ArgumentOutOfRangeError } from 'rxjs';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  host: { 
+    '[@flyInOut]': 'true',
+    'style': 'display: block'
+  },
+  animations: [ flyInOut() ]
 })
+
 export class ContactComponent implements OnInit {
 
   feedback: Feedback;
+  feedbackCopy: Feedback;
   contactType= ContactType;
   feedbackForm: FormGroup;
+  errMsg: string;
   @ViewChild('fform') feedbackFormDirective;
 
   formErrors = {
@@ -41,7 +52,9 @@ export class ContactComponent implements OnInit {
     }
   }
 
-  constructor(private fb: FormBuilder, private el: ElementRef) { 
+  constructor(private fb: FormBuilder, 
+              private el: ElementRef,
+              private feedbackService: FeedbackService) { 
     this.createForm();
   }
 
@@ -91,14 +104,21 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(){
-    this.feedback=this.feedbackForm.value;
+  onSubmit(){    
     if(this.feedbackForm.invalid){
-
       this.focusOnInvalidField();
-      return
+      return;
     }
-    this.feedbackFormDirective.resetForm();
+    this.feedbackCopy=this.feedbackForm.value;
+    this.feedbackService.submitFeedback(this.feedbackCopy)
+      .subscribe(feedback => {
+        this.feedback=feedback;
+        setTimeout(() => {
+          this.feedbackCopy = null;
+          this.feedback = null;      
+        }, 5000);
+      }, errmsg => this.errMsg = errmsg );
+      this.feedbackFormDirective.resetForm(); 
   }
 
 }

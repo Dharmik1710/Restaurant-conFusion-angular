@@ -9,10 +9,10 @@
         </div>
     </div>
 
-    <div fxFlex *ngIf="dishes">
+    <div fxFlex *ngIf="dishes" [@flyInOut]>
         <mat-grid-list fxFlex cols="2" rowHeight="200px">
-            <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
-                <img height="200px" src={{dish.image}} alt={{dish.name}}>
+            <mat-grid-tile appHighlight *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
+                <img height="200px" src="{{ BaseURL + dish.image }}" alt={{dish.name}}>
                 <mat-grid-tile-footer>
                     <h1> {{dish.name | uppercase}} </h1>
                 </mat-grid-tile-footer>
@@ -24,6 +24,12 @@
           <mat-spinner></mat-spinner>
         </div>
         <div fxLayoutAlign="center center"><h4>Loading . . . Please Wait</h4></div>
+    </div>
+    <div fxFlex *ngIf="errMsg" 
+         fxLayoutAlign="center center"
+         fxLayout="column">
+        <h2>Error</h2>
+        <h4>{{ errMsg }}</h4>
     </div>
 
     <!-- <div fxFlex *ngIf="selectedDish">

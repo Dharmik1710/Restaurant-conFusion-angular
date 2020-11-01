@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
+import { flyInOut } from '../animations/app.animation';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  host: { 
+    '[@flyInOut]': 'true',
+    'style': 'display: block'
+  },
+  animations: [flyInOut()]
 })
 export class HeaderComponent implements OnInit {
 

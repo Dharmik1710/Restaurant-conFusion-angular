@@ -48,3 +48,10 @@ $background-more-dark:  #4527A0;
 .active{
   background: $background-more-dark;
 }
+
+.highlight{
+  background-color: $background-pale;
+  border: 1px solid $primary-color-dark;
+  transform: scale(1.01);
+  z-index: 1;
+}

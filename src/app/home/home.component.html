@@ -5,58 +5,77 @@
      fxLayoutAlign.gt-md="space-around stretch"
      fxLayoutGap="50px">
 
-    <mat-card *ngIf="dish" fxFlex>
+    <mat-card *ngIf="dish" fxFlex [@flyInOut]>
         <mat-card-header>
           <mat-card-title>
             <h3>{{dish.name | uppercase}}</h3>
           </mat-card-title>
         </mat-card-header>
-        <img mat-card-image src={{dish.image}} alt={{dish.name}}>
+        <img mat-card-image src="{{ BaseURL + dish.image }}" alt={{dish.name}}>
         <mat-card-content>
           <p>{{dish.description}}</p>
         </mat-card-content>
-      </mat-card>
-      <div fxFlex [hidden]="dish">
-        <div fxLayoutAlign="center center">
-          <mat-spinner></mat-spinner>
-        </div>
-        <div fxLayoutAlign="center center"><h4>Loading . . . Please Wait</h4></div>
-      </div>   
-      
-      <mat-card *ngIf="promotion" fxFlex>
-        <mat-card-header>
-          <mat-card-title>
-            <h3>{{promotion.name | uppercase}}</h3>
-          </mat-card-title>
-        </mat-card-header>
-        <img mat-card-image src={{promotion.image}} alt={{promotion.name}}>
-        <mat-card-content>
-          <p>{{promotion.description}}</p>
-        </mat-card-content>
-      </mat-card>
-      <div fxFlex [hidden]="promotion">
-        <div fxLayoutAlign="center center">
-          <mat-spinner></mat-spinner>
-        </div>
-        <div fxLayoutAlign="center center"><h4>Loading . . . Please Wait</h4></div>
-      </div>      
-
-      <mat-card *ngIf="leader" fxFlex>
-        <mat-card-header>
-          <mat-card-title>
-            <h3>{{ leader.name }} {{ leader.abbr }}</h3>
-          </mat-card-title>
-        </mat-card-header>
-        <img mat-card-image src={{leader.image}} alt={{leader.name}}>
-        <mat-card-content>
-          <p>{{ leader.description}}</p>
-        </mat-card-content>
-      </mat-card>
-      <div fxFlex [hidden]="leader">
-        <div fxLayoutAlign="center center">
-          <mat-spinner></mat-spinner>
-        </div>
-        <div fxLayoutAlign="center center"><h4>Loading . . . Please Wait</h4></div>
+    </mat-card>
+    <div fxFlex [hidden]="dish || dishErrMsg">
+      <div fxLayoutAlign="center center">
+        <mat-spinner></mat-spinner>
       </div>
+      <div fxLayoutAlign="center center"><h4>Loading . . . Please Wait</h4></div>
+    </div>   
+    <div fxFlex *ngIf="dishErrMsg" 
+         fxLayoutAlign="center center"
+         fxLayout="column">
+        <h2>Error</h2>
+        <h4>{{ dishErrMsg }}</h4>
+    </div>
+
+    <mat-card *ngIf="promotion" fxFlex [@flyInOut]>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>{{promotion.name | uppercase}}</h3>
+        </mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{ BaseURL + promotion.image }}" alt={{promotion.name}}>
+      <mat-card-content>
+        <p>{{promotion.description}}</p>
+      </mat-card-content>
+    </mat-card>
+    <div fxFlex [hidden]="promotion || promoErrMsg">
+      <div fxLayoutAlign="center center">
+        <mat-spinner></mat-spinner>
+      </div>
+      <div fxLayoutAlign="center center"><h4>Loading . . . Please Wait</h4></div>
+    </div>   
+    <div fxFlex *ngIf="promoErrMsg" 
+         fxLayoutAlign="center center"
+         fxLayout="column">
+      <h2>Error</h2>
+      <h4>{{ promoErrMsg }}</h4>
+    </div>   
+
+    <mat-card *ngIf="leader" fxFlex [@flyInOut]>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>{{ leader.name }} {{ leader.abbr }}</h3>
+        </mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{ BaseURL + leader.image}}" alt={{leader.name}}>
+      <mat-card-content>
+        <p>{{ leader.designation }}</p>
+        <p>{{ leader.description }}</p>
+      </mat-card-content>
+    </mat-card>
+    <div fxFlex [hidden]="leader || leaderErrMsg">
+      <div fxLayoutAlign="center center">
+        <mat-spinner></mat-spinner>
+      </div>
+      <div fxLayoutAlign="center center"><h4>Loading . . . Please Wait</h4></div>
+    </div>
+    <div fxFlex *ngIf="leaderErrMsg" 
+         fxLayoutAlign="center center"
+         fxLayout="column">
+      <h2>Error</h2>
+      <h4>{{ leaderErrMsg }}</h4>
+    </div>   
   
 </div>
