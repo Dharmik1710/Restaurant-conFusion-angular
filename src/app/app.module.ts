@@ -41,6 +41,8 @@ import { BaseURL } from './shared/baseurl';
 
 import { HighlightDirective } from './directives/highlight.directive'; 
 
+import { AuthguardGuard } from './authguard.guard';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +83,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     PromotionService,
     LeaderService,
     ProcessHTTPMsgService,
+    AuthguardGuard,
     { provide: 'baseURL', useValue: BaseURL }
   ],
   entryComponents: [
